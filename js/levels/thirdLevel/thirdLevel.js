@@ -118,6 +118,8 @@ export class ThirdLevel {
             const catCount = parseInt(image.dataset.cats, 10);
             return isEven ? catCount % 2 === 0 : catCount % 2 !== 0;
         }).length;
+
+
     
         const incorrectActiveSelections = activeImages.length - correctActiveSelections;
 
@@ -134,5 +136,34 @@ export class ThirdLevel {
     
         this.correctCount = score;
         return score;
+    }
+
+    setColor() {
+        const isEven = this.selectedCondition === "even";
+        const active = document.querySelectorAll(".image.active");
+        const nonActive = document.querySelectorAll(".image")
+
+        for (let i = 0; i < active.length; i++) {
+            const catCount= parseInt(active[i].dataset.cats, 10)
+            if (isEven ? catCount % 2 === 0 : catCount % 2 !== 0) {
+               active[i].classList.add('correct');
+            } else {
+                active[i].classList.add('incorrect');
+            }
+        }
+
+
+        for (let i = 0; i < nonActive.length; i++) {
+            if (!nonActive[i].classList.contains('correct') && !nonActive[i].classList.contains('incorrect')) {
+                const catCount= parseInt(nonActive[i].dataset.cats, 10)
+                if (isEven ? catCount % 2 === 0 : catCount % 2 !== 0 ) {
+                    nonActive[i].classList.add('incorrect');
+                } else {
+                    nonActive[i].classList.add('correct');
+                }
+            }
+
+
+        }
     }
 }

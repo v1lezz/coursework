@@ -132,6 +132,8 @@ export class FirstLevel {
             return { isCorrect: false, firstPoint: 0, secondPoint: 0 };
         }
 
+        this.setNewColor(this.block1, this.block2)
+
         return { isCorrect: true, ...this.calculatePoints(block1Numbers, block2Numbers) };
     }
 
@@ -140,6 +142,10 @@ export class FirstLevel {
             .filter(el => el.classList.contains('number'))
             .map(el => parseInt(el.textContent, 10))
             .filter(num => !isNaN(num));
+    }
+
+    getBlocks(block) {
+        return Array.from(block.children).filter(el => el.classList.contains('number'))
     }
 
     calculatePoints(block1Numbers, block2Numbers) {
@@ -152,6 +158,77 @@ export class FirstLevel {
                 return this.calculateFibonacciPoints(block1Numbers, block2Numbers);
             default:
                 return { firstPoint: 0, secondPoint: 0 };
+        }
+    }
+
+    setNewColor(block1, block2) {
+        switch (this.task.type) {
+            case "easy":
+                this.setNewColorEvenOddPoints(block1, block2);
+                return
+            case "medium":
+                this.setNewColorPrimeCompositePoints(block1, block2);
+                return
+            case "hard":
+                this.setNewFibonacciPoints(block1, block2);
+                return
+        }
+    }
+
+    setNewColorEvenOddPoints(block1, block2) {
+        block1 = this.getBlocks(block1)
+        for (let i = 0; i < block1.length; i++) {
+            if (parseInt(block1[i].textContent, 10) % 2 === 0) {
+                block1[i].classList.add('correct')
+            } else {
+                block1[i].classList.add('incorrect')
+            }
+        }
+        block2 = this.getBlocks(block2)
+        for (let i = 0; i < block2.length; i++) {
+            if (parseInt(block2[i].textContent, 10) % 2 !== 0) {
+                block2[i].classList.add('correct')
+            } else {
+                block2[i].classList.add('incorrect')
+            }
+        }
+    }
+
+    setNewColorPrimeCompositePoints(block1, block2) {
+        block1 = this.getBlocks(block1)
+        for (let i = 0; i < block1.length; i++) {
+            if (isPrime(parseInt(block1[i].textContent, 10))) {
+                block1[i].classList.add('correct')
+            } else {
+                block1[i].classList.add('incorrect')
+            }
+        }
+        block2 = this.getBlocks(block2)
+        for (let i = 0; i < block2.length; i++) {
+            if (!isPrime(parseInt(block2[i].textContent, 10) % 2 !== 0)) {
+                block2[i].classList.add('correct')
+            } else {
+                block2[i].classList.add('incorrect')
+            }
+        }
+    }
+
+    setNewFibonacciPoints(block1, block2) {
+        block1 = this.getBlocks(block1)
+        for (let i = 0; i < block1.length; i++) {
+            if (isFibonacci(parseInt(block1[i].textContent, 10))) {
+                block1[i].classList.add('correct')
+            } else {
+                block1[i].classList.add('incorrect')
+            }
+        }
+        block2 = this.getBlocks(block2)
+        for (let i = 0; i < block2.length; i++) {
+            if (!isFibonacci(parseInt(block2[i].textContent, 10) % 2 !== 0)) {
+                block2[i].classList.add('correct')
+            } else {
+                block2[i].classList.add('incorrect')
+            }
         }
     }
 

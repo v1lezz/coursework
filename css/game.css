@@ -87,6 +87,14 @@ body.modal-active {
     animation: swing 1.5s infinite ease-in-out;
 }
 
+.number.correct {
+    background-color: #00ff00;
+}
+
+.number.incorrect {
+    background-color: #ff0000;
+}
+
 @keyframes swing {
     0% {
         transform: rotate(0deg);
@@ -117,6 +125,10 @@ body.modal-active {
     color: #fff;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
+}
+
+.button-nav.dark {
+    background-color: #1a571c;
 }
 
 .button-nav:hover {
@@ -284,6 +296,14 @@ input[type="text"] {
 .image.active {
     border: 3px solid #9463f9;
     transform: scale(1.1);
+}
+
+.image.correct {
+    border: 3px solid #00ff00;
+}
+
+.image.incorrect {
+    border: 3px solid #ff0000;
 }
 
 .image.active img {
