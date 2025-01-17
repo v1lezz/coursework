@@ -5,7 +5,9 @@ const getRandomArrayLinks = () => {
         "./assets/oneCats.jpg", 
         "./assets/twoCats.jpg", 
         "./assets/threeCats.jpg", 
-        "./assets/fiveCats.jpg"
+        "./assets/fourCats.jpeg",
+        "./assets/fiveCats.jpg",
+        "./assets/sixCats.jpeg",
     ];
     let shuffled = array
         .map(value => ({ value, sort: Math.random() }))
@@ -30,12 +32,14 @@ const getImageHtml = (imageSrc) => {
 };
 
 const extractCatCount = (imageSrc) => {
-    const match = imageSrc.match(/(one|two|three|five)Cats/);
+    const match = imageSrc.match(/(one|two|three|four|five|six)Cats/);
     const countMap = {
         one: 1,
         two: 2,
         three: 3,
-        five: 5
+        four: 4,
+        five: 5,
+        six: 6
     };
     return match ? countMap[match[1]] : 0;
 };
