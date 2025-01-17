@@ -82,10 +82,12 @@ class Game {
         switch (this.activeLevel) {
             case "first":
                 let points = getPointsFirstLevel(this.firstLevel)
-                // points = {
-                //     points: 0,
-                //     maxPoints: 10,
-                // }
+                if (!points) {
+                    points = {
+                        points: 0,
+                        maxPoints: 10,
+                    }
+                }
                 if (points) {
                     this.buttonNextLevel.changeTheme();
 
@@ -102,7 +104,11 @@ class Game {
                 }
                 break;
             case "second":
-                if (!this.secondLevel.inputIsClear()) {
+                let flag  = !this.secondLevel.inputIsClear()
+                if (!flag) {
+                    flag = true
+                }
+                if (flag) {
                     let modalMessage = "";
                     let correctAns = this.secondLevel.getAnswer();
                     if (this.secondLevel.checkCorrectAnswer()) {
